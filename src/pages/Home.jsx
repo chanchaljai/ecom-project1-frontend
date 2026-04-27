@@ -9,7 +9,7 @@ export default function Home() {
 
   const loadProducts = async () => {
     const res = await api.get(
-      `/products?search=${search}&category=${category}`
+      `/products?search=${search}&category=${category}`,
     );
     setProducts(res.data);
   };
@@ -29,7 +29,7 @@ export default function Home() {
 
     const total = res.data.cart.items.reduce(
       (sum, item) => sum + item.productId.price * item.quantity,
-      0
+      0,
     );
 
     localStorage.setItem("cartCount", total);
