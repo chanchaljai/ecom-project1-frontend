@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import {useNavigate} from "react-router";
 
 export default function Signup() {
   const [form,setForm]=useState({
@@ -9,11 +10,14 @@ export default function Signup() {
   })
   const [msg,setMsg]=useState("");
 
+  const navigate=useNavigate();
+
   const handleChange=(e)=>{
     setForm({
       ...form,
       [e.target.name]:e.target.value
     });
+
   }
 
   const handleSubmit=async(e)=>{
@@ -21,7 +25,11 @@ export default function Signup() {
 
     try{
       const response=await api.post("/auth/signup",form);
-      setMsg(response.data.message);
+      setMsg(response.data.message || "Account Created Successfully");
+      // redirect to login page after 1 second
+      setTimeout(()=>{
+        navigate("/login");
+      },500)
     } catch(err){
       setMsg(err.response?.data?.message || "An error occurred" );
     }
