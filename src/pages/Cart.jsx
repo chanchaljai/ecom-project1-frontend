@@ -69,7 +69,7 @@ export default function Cart() {
                     {item.productId.title}
                   </h2>
                   <p className="text-gray-600">
-                    ${item.productId.price.toFixed(2)}
+                    ₹{item.productId.price.toFixed(2)}
                   </p>
                 </div>
               </div>
